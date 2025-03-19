@@ -31,7 +31,7 @@ class Game {
         this.particleSystem = new ParticleSystem(this.scene);
         
         // Create power-up manager
-        this.powerUpManager = new PowerUpManager(this.scene, this.audioManager);
+        this.powerUpManager = new PowerUpManager(this.scene, this.audioManager, this.particleSystem);
         
         // Create brick manager
         this.brickManager = new BrickManager(
