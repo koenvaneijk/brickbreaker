@@ -71,6 +71,26 @@ body {
     font-family: 'Orbitron', sans-serif;
 }
 
+.control-button {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 24px;
+    margin-left: 10px;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.control-button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    transform: scale(1.1);
+}
+
+.control-button.muted {
+    color: var(--accent-color);
+}
+
 #balls-value {
     font-size: 24px;
     font-weight: 700;

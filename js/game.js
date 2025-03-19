@@ -258,10 +258,26 @@ class Game {
         document.addEventListener('keydown', (event) => this.handleKeyDown(event));
         
         // Mouse click to release ball
-        document.addEventListener('click', () => this.releaseBall());
+        document.addEventListener('click', (event) => {
+            // Don't trigger if clicking on a button
+            if (event.target.closest('button') || event.target.closest('.control-button')) return;
+            this.releaseBall();
+        });
         
         // Touch to release ball
-        document.addEventListener('touchstart', () => this.releaseBall());
+        document.addEventListener('touchstart', (event) => {
+            // Don't trigger if touching a button
+            if (event.target.closest('button') || event.target.closest('.control-button')) return;
+            this.releaseBall();
+        });
+        
+        // Mute button
+        const muteButton = document.getElementById('mute-button');
+        muteButton.addEventListener('click', () => {
+            const isMuted = this.audioManager.toggleMute();
+            muteButton.textContent = isMuted ? '🔇' : '🔊';
+            muteButton.classList.toggle('muted', isMuted);
+        });
     }
     
     handleKeyDown(event) {
@@ -481,6 +497,14 @@ class Game {
         
         // Render scene
         this.renderer.render(this.scene, this.camera);
+        
+        // Update music intensity based on gameplay
+        if (this.state === 'playing' && this.audioManager.initialized) {
+            const brickRatio = 1 - (this.brickManager.getDestructibleBrickCount() / 50);
+            const comboFactor = Math.min(this.combo / 10, 1);
+            const intensity = Math.max(brickRatio, comboFactor);
+            this.audioManager.setMusicIntensity(intensity);
+        }
     }
     
     update(deltaTime) {
