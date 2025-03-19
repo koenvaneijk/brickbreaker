@@ -228,7 +228,7 @@ class PowerUpManager {
         uiElement.className = 'power-up-indicator';
         uiElement.style.backgroundColor = `#${powerUpInfo.color.toString(16).padStart(6, '0')}`;
         uiElement.innerHTML = `
-            ${powerUpInfo.icon}
+            <span class="power-up-icon">${powerUpInfo.icon}</span>
             <div class="power-up-timer">
                 <div class="power-up-timer-fill"></div>
             </div>

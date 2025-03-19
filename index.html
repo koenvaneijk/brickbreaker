@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Cosmic Brick Breaker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.26/Tone.js"></script>
@@ -13,22 +16,35 @@
     <div id="game-container">
         <div id="ui-container">
             <div id="score-container">
-                <div id="score">Score: <span id="score-value">0</span></div>
-                <div id="high-score">High Score: <span id="high-score-value">0</span></div>
+                <div id="score">SCORE <span id="score-value">0</span></div>
+                <div id="high-score">HIGH SCORE <span id="high-score-value">0</span></div>
             </div>
             <div id="power-ups-container"></div>
-            <div id="balls-container">Balls: <span id="balls-value">3</span></div>
+            <div id="balls-container"><span id="balls-value">3</span> BALLS</div>
         </div>
         <div id="game-over" class="hidden">
-            <h2>Game Over</h2>
-            <p>Final Score: <span id="final-score">0</span></p>
-            <button id="restart-button">Play Again</button>
+            <div class="panel-content">
+                <h2>GAME OVER</h2>
+                <div class="score-display">
+                    <p>FINAL SCORE</p>
+                    <div class="final-score-value"><span id="final-score">0</span></div>
+                </div>
+                <button id="restart-button">PLAY AGAIN</button>
+            </div>
         </div>
         <div id="start-screen">
-            <h1>Cosmic Brick Breaker</h1>
-            <button id="start-button">Start Game</button>
-            <p>Move your mouse to control the paddle</p>
-            <p>Break bricks and catch power-ups to score points</p>
+            <div class="panel-content">
+                <div class="logo">
+                    <h1>COSMIC</h1>
+                    <h1 class="subtitle">BRICK BREAKER</h1>
+                </div>
+                <button id="start-button">START GAME</button>
+                <div class="instructions">
+                    <p>Move your mouse to control the paddle</p>
+                    <p>Break bricks and catch power-ups to score points</p>
+                    <p>Press SPACE to launch the ball</p>
+                </div>
+            </div>
         </div>
     </div>
 
