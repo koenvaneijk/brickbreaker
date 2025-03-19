@@ -120,7 +120,9 @@ class BrickManager {
         
         // Determine grid size based on difficulty
         const rows = Math.min(8, 3 + Math.floor(difficulty / 2));
-        const cols = 10;
+        // Adjust columns based on game width
+        const gameWidth = this.scene.userData.gameWidth || 20;
+        const cols = Math.max(5, Math.floor(gameWidth / 2));
         
         // Calculate spacing and offset
         const spacing = 2;
@@ -175,7 +177,9 @@ class BrickManager {
         
         // Calculate spacing and offset
         const spacing = 2;
-        const cols = 10;
+        // Adjust columns based on game width
+        const gameWidth = this.scene.userData.gameWidth || 20;
+        const cols = Math.max(5, Math.floor(gameWidth / 2));
         const offsetX = -(cols * spacing) / 2 + spacing / 2;
         const offsetY = 10;
         

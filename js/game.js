@@ -88,6 +88,9 @@ class Game {
         );
         this.camera.position.set(0, 0, 25);
         
+        // Adjust game width based on aspect ratio
+        this.updateGameDimensions();
+        
         // Create renderer
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -240,34 +243,8 @@ class Game {
     }
     
     createWalls() {
-        // Create invisible walls for collision
-        const wallMaterial = new THREE.MeshPhongMaterial({
-            color: 0x0088ff,
-            transparent: true,
-            opacity: 0.1,
-            side: THREE.DoubleSide
-        });
-        
-        // Left wall
-        const leftWallGeometry = new THREE.PlaneGeometry(1, this.height);
-        const leftWall = new THREE.Mesh(leftWallGeometry, wallMaterial);
-        leftWall.position.set(-this.width / 2 - 0.5, 0, 0);
-        leftWall.rotation.y = Math.PI / 2;
-        this.scene.add(leftWall);
-        
-        // Right wall
-        const rightWallGeometry = new THREE.PlaneGeometry(1, this.height);
-        const rightWall = new THREE.Mesh(rightWallGeometry, wallMaterial);
-        rightWall.position.set(this.width / 2 + 0.5, 0, 0);
-        rightWall.rotation.y = -Math.PI / 2;
-        this.scene.add(rightWall);
-        
-        // Top wall
-        const topWallGeometry = new THREE.PlaneGeometry(this.width, 1);
-        const topWall = new THREE.Mesh(topWallGeometry, wallMaterial);
-        topWall.position.set(0, this.height / 2 + 0.5, 0);
-        topWall.rotation.x = Math.PI / 2;
-        this.scene.add(topWall);
+        // Create walls with current dimensions
+        this.updateWalls();
     }
     
     setupEventListeners() {
@@ -434,6 +411,55 @@ class Game {
         
         // Update renderer size
         this.renderer.setSize(window.innerWidth, window.innerHeight);
+        
+        // Update game dimensions
+        this.updateGameDimensions();
+        
+        // Recreate walls with new dimensions
+        this.updateWalls();
+    }
+    
+    updateGameDimensions() {
+        // Calculate game width based on aspect ratio and height
+        const aspectRatio = window.innerWidth / window.innerHeight;
+        this.height = 30; // Keep height constant
+        this.width = Math.min(30, this.height * aspectRatio * 0.7); // Limit max width
+    }
+    
+    updateWalls() {
+        // Remove existing walls
+        if (this.leftWall) this.scene.remove(this.leftWall);
+        if (this.rightWall) this.scene.remove(this.rightWall);
+        if (this.topWall) this.scene.remove(this.topWall);
+        
+        // Create new walls with updated dimensions
+        const wallMaterial = new THREE.MeshPhongMaterial({
+            color: 0x0088ff,
+            transparent: true,
+            opacity: 0.1,
+            side: THREE.DoubleSide
+        });
+        
+        // Left wall
+        const leftWallGeometry = new THREE.PlaneGeometry(1, this.height);
+        this.leftWall = new THREE.Mesh(leftWallGeometry, wallMaterial);
+        this.leftWall.position.set(-this.width / 2 - 0.5, 0, 0);
+        this.leftWall.rotation.y = Math.PI / 2;
+        this.scene.add(this.leftWall);
+        
+        // Right wall
+        const rightWallGeometry = new THREE.PlaneGeometry(1, this.height);
+        this.rightWall = new THREE.Mesh(rightWallGeometry, wallMaterial);
+        this.rightWall.position.set(this.width / 2 + 0.5, 0, 0);
+        this.rightWall.rotation.y = -Math.PI / 2;
+        this.scene.add(this.rightWall);
+        
+        // Top wall
+        const topWallGeometry = new THREE.PlaneGeometry(this.width, 1);
+        this.topWall = new THREE.Mesh(topWallGeometry, wallMaterial);
+        this.topWall.position.set(0, this.height / 2 + 0.5, 0);
+        this.topWall.rotation.x = Math.PI / 2;
+        this.scene.add(this.topWall);
     }
     
     animate(time = 0) {
@@ -458,6 +484,10 @@ class Game {
     }
     
     update(deltaTime) {
+        // Store game dimensions in scene for other objects to access
+        this.scene.userData.gameWidth = this.width;
+        this.scene.userData.gameHeight = this.height;
+        
         // Update paddle
         this.paddle.update(deltaTime, this.width);
         
