@@ -183,12 +183,12 @@ class PowerUpManager {
     checkPaddleCollision(powerUp, paddle) {
         // Simple AABB collision check
         const paddleBounds = {
-            minX: paddle.position.x - paddle.scale.x / 2,
-            maxX: paddle.position.x + paddle.scale.x / 2,
-            minY: paddle.position.y - paddle.scale.y / 2,
-            maxY: paddle.position.y + paddle.scale.y / 2,
-            minZ: paddle.position.z - paddle.scale.z / 2,
-            maxZ: paddle.position.z + paddle.scale.z / 2
+            minX: paddle.position.x - paddle.width / 2,
+            maxX: paddle.position.x + paddle.width / 2,
+            minY: paddle.position.y - paddle.height / 2,
+            maxY: paddle.position.y + paddle.height / 2,
+            minZ: paddle.position.z - paddle.depth / 2,
+            maxZ: paddle.position.z + paddle.depth / 2
         };
         
         const powerUpBounds = {
