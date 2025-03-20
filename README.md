@@ -41,17 +41,17 @@ The game features:
 
 ## Development
 
-This game was developed as a modern web application showcasing advanced graphics and audio techniques in browser-based games. It demonstrates how to create engaging gameplay with procedural content generation and dynamic audio that responds to player actions.
+This game was developed 100% with AI Claude 3.7 Sonnet by Anthropic AI as a modern web application showcasing advanced graphics and audio techniques in browser-based games. It demonstrates how to create engaging gameplay with procedural content generation and dynamic audio that responds to player actions with AI.
 
 ## Creator
 
-[Your Name]
+Koen van Eijk
 
 ## License
 
 MIT License
 
-Copyright (c) 2025 [Your Name]
+Copyright (c) 2025 Koen van EIjk
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
